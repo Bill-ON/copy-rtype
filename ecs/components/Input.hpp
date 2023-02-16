@@ -2,6 +2,7 @@
 #define INPUT_HPP
 
 #include <map>
+#include <functional>
 #include "keyboard_input.hpp"
 #include "Event.hpp"
 #include <memory>
