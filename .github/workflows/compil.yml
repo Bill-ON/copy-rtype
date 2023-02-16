@@ -12,10 +12,17 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+          
+      - name: Create BUILD folder
+        working-directory: ${{github.workspace}}/server
+        run: mkdir build
+        
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
+        
         run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
         continue-on-error: true
+        
       - name: Build Server
         working-directory: ${{github.workspace}}/server
-        run: cmake --build ./build
+        run: cmake --build ./build/
