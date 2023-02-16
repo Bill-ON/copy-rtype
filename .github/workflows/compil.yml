@@ -26,8 +26,8 @@ jobs:
 
     
     - name: launch cmake
-      working-directory: ${{github.workspace}}
-      run: ; cd ./server; cmake -B ./build -S .
+      working-directory: ${{github.workspace}}/server
+      run: cmake -B ./build -S .
       
     - name: build executable
       working-directory: ${{github.workspace}}/server
