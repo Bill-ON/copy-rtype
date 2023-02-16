@@ -1,35 +1,23 @@
-name: compilation in unix system
+name: CI/CD
 
-# A Github Action to verify if the project can be built and executed in Windows and UNIX systems
-
-on:
-  push:
-    branches: [ "main" ]
-  delete:
-    branches: [ "main" ]
-
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  linux_compile:
+  linux:
+    name: Linux-x86
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
-        fetch-depth: 0
-    
-    - name: Install CMAKE
-      run: sudo apt-get update && sudo apt-get install -y build-essential cmake
-
-    - name: Set up Vcpkg environment variables
-      run: export VCPKG_ROOT="${{github.workspace}}/vcpkg"
-
-    
-    - name: launch cmake in server
-      working-directory: ${{github.workspace}}/server
-      run: cmake -B ${{github.workspace}}/server/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
-      
-    - name: build server executable
-      working-directory: ${{github.workspace}}/server
-      run: cmake --build ./build
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Configure
+        working-directory: ${{github.workspace}}/server
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
+        continue-on-error: true
+      - name: Print vcpkg log
+        run: cat "${{github.workspace}}/server/build/vcpkg-manifest-install.log"
+      - name: Build
+        working-directory: ${{github.workspace}}/server
+        run: cmake --build ${{github.workspace}}/server/build
