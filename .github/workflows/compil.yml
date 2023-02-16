@@ -29,4 +29,4 @@ jobs:
         
       - name: Build Server
         working-directory: ${{github.workspace}}/server
-        run: cmake --build ./build/ --config ${{env.BUILD_TYPE}}
+        run: cmake --build ./build/
