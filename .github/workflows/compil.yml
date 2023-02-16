@@ -26,9 +26,10 @@ jobs:
       run: export VCPKG_ROOT="${{github.workspace}}/vcpkg"
 
     
-    - name: launch cmake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
+    - name: launch cmake in server
+      working-directory: ${{github.workspace}}/server
+      run: cmake -B ${{github.workspace}}/server/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
       
-    - name: build executable
+    - name: build server executable
       working-directory: ${{github.workspace}}/server
       run: cmake --build ./build
