@@ -1,12 +1,12 @@
-name: Mirroring
+name: compilation in unix system
 
 # A Github Action to verify if the project can be built and executed in Windows and UNIX systems
 
 on:
   push:
-    branches: [ "52-test-github-actions" ]
+    branches: [ "main" ]
   delete:
-    branches: [ "52-test-github-actions" ]
+    branches: [ "main" ]
 
   workflow_dispatch:
 
