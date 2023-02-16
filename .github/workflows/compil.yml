@@ -23,7 +23,7 @@ jobs:
         run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         continue-on-error: true
         
-        - name: reset Cache
+      - name: reset Cache
         working-directory: ${{github.workspace}}/server/build
         run: rm -rf CMakeCache.txt
         
