@@ -23,7 +23,7 @@ jobs:
     
     - name: launch cmake
       working-directory: ${{github.workspace}}/server
-      run: cmake -B ./build -S .
+      run: cmake -B ./build -S . -DCMAKE_TOOLCHAIN_FILE="../vcpkg/scripts/buildsystems/vcpkg.cmake"
       
     - name: build executable
       working-directory: ${{github.workspace}}/server
