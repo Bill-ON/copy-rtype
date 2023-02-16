@@ -12,12 +12,10 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Configure
+      - name: Configure Server
         working-directory: ${{github.workspace}}/server
         run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
         continue-on-error: true
-      - name: Print vcpkg log
-        run: cat "${{github.workspace}}/server/build/vcpkg-manifest-install.log"
-      - name: Build
+      - name: Build Server
         working-directory: ${{github.workspace}}/server
         run: cmake --build ${{github.workspace}}/server/build
