@@ -25,4 +25,4 @@ jobs:
         
       - name: Build Server
         working-directory: ${{github.workspace}}/server
-        run: cmake --build ./build/
+        run: cmake --build ./build/ --target all
