@@ -16,28 +16,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        submodules: "recursive"
+        submodules: recursive
+        fetch-depth: 0
     
     - name: Install CMAKE
       run: sudo apt-get update && sudo apt-get install -y build-essential cmake
-      
-    - name: Install Vcpkg dependencies
-      working-directory: ${{github.workspace}}/vcpkg
-      run: ./bootstrap-vcpkg.sh
 
     - name: Set up Vcpkg environment variables
-      run: export VCPKG_ROOT="$(pwd)/vcpkg"; export CMAKE_TOOLCHAIN_FILE="$(pwd)/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      run: export VCPKG_ROOT="${{github.workspace}}/vcpkg"
 
     
     - name: launch cmake
-      working-directory: ${{github.workspace}}/server
-      run: cmake -B ./build -S .
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
       
     - name: build executable
       working-directory: ${{github.workspace}}/server
       run: cmake --build ./build
-      
-    - name: launch server
-      working-directory: ${{github.workspace}}/server
-      run: ./build/r-type_server
-    
