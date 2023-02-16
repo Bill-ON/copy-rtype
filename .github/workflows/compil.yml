@@ -20,9 +20,9 @@ jobs:
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
         
-        run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET="x64-linux"
+        run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         continue-on-error: true
         
       - name: Build Server
         working-directory: ${{github.workspace}}/server
-        run: cmake --build ./build/ --target all
+        run: cmake --build ./build/ --config ${{env.BUILD_TYPE}}
