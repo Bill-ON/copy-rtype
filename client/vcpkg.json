@@ -1,0 +1,14 @@
+{
+    "name": "r-type",
+    "version-string": "v0.2.0-alpha",
+    "builtin-baseline": "5908d702d61cea1429b223a0b7a10ab86bad4c78",
+    "dependencies": [
+      {
+        "name": "sfml",
+        "version>=": "2.5.1#14"
+      },
+      "boost-system",
+      "boost-thread",
+      "boost-regex"
+    ]
+}
