@@ -12,9 +12,6 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-          
-      - name: check where cpp is
-        run: which g++
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
@@ -31,7 +28,7 @@ jobs:
         
       - name: reload Server cache
         working-directory: ${{github.workspace}}/server
-        run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         continue-on-error: true
         
       - name: Build Server
