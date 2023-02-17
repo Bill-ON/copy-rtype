@@ -2,10 +2,18 @@ name: Compile on UNIX
 
 on: [push, pull_request]
 
+env:
+    CMAKE_CXX_COMPILER: /usr/bin/g++
+    CMAKE_C_COMPILER: /usr/bin/gcc
+    CMAKE_TOOLCHAIN_FILE: ${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+    CMAKE_MAKE_PROGRAM: /usr/bin/make
+
 jobs:
   linux:
     name: Linux-x86
     runs-on: ubuntu-latest
+    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -23,9 +31,6 @@ jobs:
       - name: install NINJA
         run: python -m pip install ninja
         
-      - name: set env var
-        run : export CMAKE_CXX_COMPILER=/usr/bin/g++; export CMAKE_C_COMPILER=/usr/bin/gcc; export CMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake; export CMAKE_MAKE_PROGRAM=/usr/bin/make
-        
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
         run: cmake -S . -B ./build
@@ -42,4 +47,4 @@ jobs:
         
       - name: Build Server
         working-directory: ${{github.workspace}}/server
-        run: cmake --build ./build/
+        run: cmake --build ./build
