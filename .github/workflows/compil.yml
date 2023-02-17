@@ -13,8 +13,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: install make
-        run: make -version
+      - name: install ninja
+        run: python -m pip install ninja
+        
+      - name: check ninja
+        run: ninja --version
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
