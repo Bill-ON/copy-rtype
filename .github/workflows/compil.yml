@@ -13,8 +13,8 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           
-      - name: check cpp
-        run: g++ -v
+      - name: check where cpp is
+        run: which g++
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
