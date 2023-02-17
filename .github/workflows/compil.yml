@@ -13,6 +13,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: install make
+        run: make -version
+
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
         run: mkdir build
