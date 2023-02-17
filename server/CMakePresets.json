@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "configurePresets": [
+      {
+        "name": "with-logs",
+        "binaryDir": "cmake-build-with-logs",
+        "generator": "Unix Makefiles",
+        "cacheVariables": {
+          "ENABLE_LOGGING": "TRUE"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "with-logs",
+        "configurePreset": "with-logs"
+      }
+    ]
+  }
