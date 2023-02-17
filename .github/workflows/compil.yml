@@ -22,14 +22,6 @@ jobs:
         run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         continue-on-error: true
         
-      - name: delete Cache
-        working-directory: ${{github.workspace}}/server/build
-        run: rm -rf CMakeCache.txt
-        
-      - name: reload Server cache
-        working-directory: ${{github.workspace}}/server
-        run: cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
-        continue-on-error: true
         
       - name: Build Server
         working-directory: ${{github.workspace}}/server
