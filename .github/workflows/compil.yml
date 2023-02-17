@@ -11,7 +11,7 @@ env:
 jobs:
   linux:
     name: Linux-x86
-    runs-on: fedora-36
+    runs-on: ubuntu-latest
     
 
     steps:
