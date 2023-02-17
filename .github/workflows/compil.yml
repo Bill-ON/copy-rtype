@@ -33,7 +33,7 @@ jobs:
         
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
-        run: cmake -S . -B ./build
+        run: cmake -S . -B ./build -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_MAKE_PROGRAM=/usr/bin/make
         continue-on-error: true
         
       - name: delete Cache
@@ -42,7 +42,7 @@ jobs:
         
       - name: reload Server cache
         working-directory: ${{github.workspace}}/server
-        run: cmake -S . -B ./build
+        run: cmake -S . -B ./build -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_MAKE_PROGRAM=/usr/bin/make
         continue-on-error: true
         
       - name: Build Server
