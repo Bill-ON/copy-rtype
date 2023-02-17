@@ -12,7 +12,6 @@ jobs:
   linux:
     name: Linux-x86
     runs-on: ubuntu-latest
-    
 
     steps:
       - name: Checkout
@@ -23,6 +22,9 @@ jobs:
           
       - name: install basics
         run: sudo apt install build-essential
+        
+      - name: install sfml subpackages
+        run: sudo apt-get install libudev libx11 libxrandr opengl
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
