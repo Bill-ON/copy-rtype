@@ -13,8 +13,8 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           
-      - name: download cpp
-        run: apt-get install cmake gcc g++
+      - name: check cpp
+        run: g++ -v
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
