@@ -25,7 +25,7 @@ jobs:
         
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
-        run: cmake -S . -B ./buil
+        run: cmake -S . -B ./build -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_MAKE_PROGRAM=/usr/bin/make
         
       - name: check files
         working-directory: ${{github.workspace}}/server
