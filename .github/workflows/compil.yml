@@ -17,14 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          submodules: recursive
-          fetch-depth: 0
-          
-      - name: install basics
-        run: sudo apt install build-essential
-        
-      - name: install sfml subpackages
-        run: sudo apt-get install -y libudev-dev libx11-dev libxrandr-dev freeglut3-dev
+          submodules: true
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
@@ -32,7 +25,7 @@ jobs:
         
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
-        run: cmake -S . -B ./build -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_MAKE_PROGRAM=/usr/bin/make
+        run: cmake -S . -B ./buil
         
       - name: check files
         working-directory: ${{github.workspace}}/server
