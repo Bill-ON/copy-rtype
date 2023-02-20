@@ -1,6 +1,12 @@
 name: Compile on UNIX
 
-on: [push, pull_request]
+on:
+    push:
+        branches:
+            - poyo
+    pull_request:
+        branches:
+            - poyo
 
 env:
     CMAKE_CXX_COMPILER: /usr/bin/g++
