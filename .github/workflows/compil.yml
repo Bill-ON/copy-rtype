@@ -19,6 +19,9 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+          
+      - name: Install LIBUDEV
+        run: sudo apt-get install libudev-dev
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
