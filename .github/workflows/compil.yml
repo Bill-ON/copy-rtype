@@ -15,8 +15,8 @@ env:
     CMAKE_MAKE_PROGRAM: /usr/bin/make
 
 jobs:
-  linux:
-    name: Linux-x86
+  linux-server:
+    name: Linux-x86-server
     runs-on: ubuntu-latest
 
     steps:
@@ -51,4 +51,42 @@ jobs:
         
       - name: check POST build
         working-directory: ${{github.workspace}}/server/build
+        run: ls
+
+  linux-client:
+    name: Linux-x86-client
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          
+      - name: Install LIBUDEV
+        run: sudo apt-get install libudev-dev libxrandr-dev libx11-dev freeglut3-dev
+
+      - name: Create BUILD folder
+        working-directory: ${{github.workspace}}/client
+        run: mkdir build
+        
+      - name: Configure client
+        working-directory: ${{github.workspace}}/client
+        run: cmake -S . -B ./build -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_MAKE_PROGRAM=/usr/bin/make
+        
+      - name: check files
+        working-directory: ${{github.workspace}}/client
+        run: ls
+        
+      - name: check files in build
+        working-directory: ${{github.workspace}}/client/build
+        run: ls
+        
+      - name: Build client
+        working-directory: ${{github.workspace}}/client
+        run: cmake --build ./build
+        
+      - name: check POST build
+        working-directory: ${{github.workspace}}/client/build
         run: ls
