@@ -45,3 +45,7 @@ jobs:
       - name: Build Server
         working-directory: ${{github.workspace}}/server
         run: cmake --build ./build
+        
+      - name: check POST build
+        working-directory: ${{github.workspace}}/server/build
+        run: ls
