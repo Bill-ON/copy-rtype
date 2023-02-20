@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
           
       - name: Install LIBUDEV
-        run: sudo apt-get install libudev-dev
+        run: sudo apt-get install libudev-dev libxrandr-dev libx11-dev freeglut3-dev
 
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
