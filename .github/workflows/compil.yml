@@ -17,7 +17,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
+          fetch-depth: 0
           
       - name: install basics
         run: sudo apt install build-essential
@@ -28,9 +29,6 @@ jobs:
       - name: Create BUILD folder
         working-directory: ${{github.workspace}}/server
         run: mkdir build
-      
-      - name: Check VCPKG
-        run: which vcpkg
         
       - name: Configure Server
         working-directory: ${{github.workspace}}/server
